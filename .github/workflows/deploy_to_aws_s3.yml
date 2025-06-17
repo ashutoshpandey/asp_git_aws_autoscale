@@ -16,10 +16,10 @@ jobs:
       run: |
         zip -r app.zip . -x ".git/*" ".vscode/*" "node_modules/*" "bin/*" "obj/*"
 
-    - name: Upload code to S3
+    - name: Upload `app.zip` to S3
       uses: jakejarvis/s3-sync-action@master
       with:
-        args: --delete
+        args: --exact-timestamps --delete --exclude "*" --include "app.zip"
       env:
         AWS_S3_BUCKET: ${{ vars.AWS_BUCKET }}
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
