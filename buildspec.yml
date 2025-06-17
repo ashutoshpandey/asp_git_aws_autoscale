@@ -18,4 +18,3 @@ artifacts:
     - '**/*'
   base-directory: ./output
   discard-paths: no
-  name: artifacts/output.zip
