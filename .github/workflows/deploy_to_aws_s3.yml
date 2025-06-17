@@ -16,20 +16,12 @@ jobs:
       run: |
         zip -r app.zip . -x ".git/*" ".vscode/*" "node_modules/*" "bin/*" "obj/*"
 
-    - name: Upload `app.zip` to S3
-      uses: jakejarvis/s3-sync-action@master
-      with:
-        args: |
-          --delete
-          --exclude "*"
-          --include "app.zip"
+    - name: Upload only app.zip via AWS CLI
+      run: aws s3 cp app.zip s3://${{ vars.AWS_BUCKET }}/source/app.zip
       env:
-        AWS_S3_BUCKET: ${{ vars.AWS_BUCKET }}
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: ${{ vars.AWS_REGION }}
-        SOURCE_DIR: "."
-        DEST_DIR: "source"
 
     - name: Start AWS CodeBuild Project
       uses: aws-actions/aws-codebuild-run-build@v1
