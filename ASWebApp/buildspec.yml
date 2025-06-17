@@ -1,0 +1,21 @@
+﻿version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      dotnet: 8.0
+    commands:
+      - echo Installing .NET dependencies...
+      - dotnet restore
+
+  build:
+    commands:
+      - echo Building the project...
+      - dotnet publish -c Release -o ./output
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: ./output
+  discard-paths: no
+  name: artifacts/output.zip

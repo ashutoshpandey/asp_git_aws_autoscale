@@ -1,0 +1,55 @@
+﻿## Build results
+bin/
+obj/
+out/
+
+## User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Rider
+.idea/
+
+## VS Code
+.vscode/
+
+## Logs
+*.log
+
+## OS generated files
+.DS_Store
+Thumbs.db
+
+## ASP.NET Core environment files
+.env
+appsettings.*.json
+secrets.json
+
+## ASP.NET scaffolding
+ScaffoldingReadMe.txt
+
+## Publish artifacts
+publish/
+output/
+
+## Temporary files
+*.tmp
+*.temp
+
+.vs/
+
+## Test results
+TestResults/
+*.coverage
+*.coveragejson
+*.trx
+
+## Packages
+packages/
+*.nupkg
+project.lock.json
+
+## Others
+_ReSharper*/

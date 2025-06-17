@@ -1,0 +1,6 @@
+@ASWebApp_HostAddress = http://localhost:5170
+
+GET {{ASWebApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
