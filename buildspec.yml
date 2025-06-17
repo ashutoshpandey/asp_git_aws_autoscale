@@ -6,12 +6,12 @@ phases:
       dotnet: 8.0
     commands:
       - echo Installing .NET dependencies...
-      - dotnet restore
+      - dotnet restore ASWebApp/ASWebApp.csproj
 
   build:
     commands:
       - echo Building the project...
-      - dotnet publish -c Release -o ./output
+      - dotnet publish ASWebApp/ASWebApp.csproj -c Release -o ./output
 
 artifacts:
   files:
