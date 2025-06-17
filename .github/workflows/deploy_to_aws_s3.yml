@@ -14,7 +14,7 @@ jobs:
 
     - name: Zip the code
       run: |
-        zip -r app.zip .
+        zip -r app.zip . -x ".git/*" ".vscode/*" "node_modules/*" "bin/*" "obj/*"
 
     - name: Upload code to S3
       uses: jakejarvis/s3-sync-action@master
