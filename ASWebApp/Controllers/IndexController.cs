@@ -16,7 +16,7 @@ namespace ASWebApp.Controllers
         [HttpGet(Name = "/")]
         public IActionResult Get()
         {
-            return Ok(new { message = "App is running on port 5000"});
+            return Ok(new { message = "Server app is running on port 5000"});
         }
     }
 }
