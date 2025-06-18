@@ -6,6 +6,7 @@
 4. Auto Scale Group, maintains scalability and automation of EC2 instances
 5. AWS Code Build, builds source code
 6. EC2 => Target groups
+7. EC2 => Application load balancer
 
 # Configuration: 
 
@@ -81,6 +82,29 @@ aws s3 cp s3://autoscale-test/publish/ . --recursive
 nohup dotnet ASWebApp.dll --urls "http://0.0.0.0:5000" > app.log 2>&1 &
 ```
 	
+## Security Group
+
+Make sure following rules are set in your security group and keep it same for all
+- Outbound rules: All Traffic => Any where
+- Inbout rules
+  Type		Port range		Source
+  Custom	5000			(security group id)
+  HTTP		80				Anywhere
+
+## Target Group
+
+Create a target group with following settings:
+- Target Type = Instance
+- Port = 5000
+- Health Path = /index (or whatever your endpoint)
+
+## Load balancer
+
+In your security group, allow load balancer.
+- Check load balancer security group under Security tab of load balancer
+- In launch template security group, add Http => Custom => select load balancer security group
+- Load balancer to run on port 80 and forwards to your target group.
+
 ## Flow
 
 1. Code is push to Github main branch
@@ -89,3 +113,5 @@ nohup dotnet ASWebApp.dll --urls "http://0.0.0.0:5000" > app.log 2>&1 &
 	- Copies app.zip to S3 bucket => source folder
 	- Triggers CodeBuild to build the code and put into same S3 bucket => artifacts folder
 	- Refreshes auto scaling group
+3. Auto scale refreshes the instances
+4. It uses launch template to create new instance(s)
